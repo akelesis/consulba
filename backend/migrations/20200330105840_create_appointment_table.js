@@ -1,7 +1,10 @@
 exports.up = function(knex) {
   return knex.schema.createTable("appointment", table => {
     table.increments("appoint_id").primary();
-    table.integer("doctor_id").notNull();
+    table
+      .integer("doctor_id")
+      .unsigned()
+      .notNull();
     table.string("date").notNull();
     table.string("time").notNull();
     table.string("patient_name").notNull();
