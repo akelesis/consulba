@@ -1,0 +1,31 @@
+{
+  "name": "consultas-backend",
+  "version": "1.0.0",
+  "description": "backend virtual appointments system",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akelesis/consulba.git"
+  },
+  "keywords": [
+    "appointment",
+    "medical"
+  ],
+  "author": "MVTech Solutions",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akelesis/consulba/issues"
+  },
+  "homepage": "https://github.com/akelesis/consulba#readme",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.20.13",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0"
+  }
+}
