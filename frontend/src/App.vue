@@ -1,20 +1,15 @@
 c<template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
     <Header></Header>
-    <Content/>
+    <Content />
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-
-import Header from './templates/Header'
-import Footer from './templates/Footer'
-import Content from './templates/Content'
+import Header from "./templates/Header";
+import Footer from "./templates/Footer";
+import Content from "./templates/Content";
 
 export default {
   components: {
@@ -22,14 +17,30 @@ export default {
     Footer,
     Content
   }
-}
+};
 </script>
 
 <style>
-body{
+* {
+  font-family: Calibri, sans-serif;
+}
+
+body {
   margin: 0;
   overflow: hidden;
   min-height: 100vh;
+}
+
+#header {
+  grid-area: header-area;
+}
+
+#content {
+  grid-area: content-area;
+}
+
+#footer {
+  grid-area: footer-area;
 }
 
 #app {
@@ -38,6 +49,13 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: grid;
+  grid-template-rows: 75px 1fr 100px;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header-area"
+    "content-area"
+    "footer-area";
 }
 
 #nav {
