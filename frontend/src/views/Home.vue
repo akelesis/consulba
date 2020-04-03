@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <img src="../assets/medico-img.jpg" alt="">
+  </div> 
     <div class="button-box">
       <Button
         text="Quero marcar a minha consulta"
@@ -13,6 +15,7 @@
       />
     </div>
   </div>
+
 </template>
 
 <script>
