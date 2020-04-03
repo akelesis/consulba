@@ -18,15 +18,16 @@ export default {
     display: flex;
     flex-wrap: wrap;
     text-align: left;
-    height: 120px;
+    cursor: pointer;
+    height: auto;
     width: 400px;
-    box-shadow: 5px 5px 8px;
+    box-shadow: 1px 1px 5px;
 }
 
 .postmed-container p{
     color: white;
     font-size: 20px;
-    margin-left: 10px;
+    margin-left: 15px;
     width: 100vw;
 }
 

@@ -6,17 +6,17 @@ import DashPaciente from '../views/DashPaciente'
 import AgendaMed from '../views/AgendaMed'
 import AgendaPaciente from '../views/AgendaPaciente'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: "/about",
+    name: "About",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -41,13 +41,23 @@ const routes = [
     path: '/agendapaciente',
     name: 'AgendaPaciente',
     component: AgendaPaciente
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: () => import("../views/Register.vue")
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/Login.vue")
   }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;
