@@ -16,46 +16,45 @@ module.exports = app => {
 
   const post = async (req, res) => {
     let {
-      doctor_id,
-      doctor_name,
-      doctor_email,
-      doctor_crm,
-      doctor_password,
-      doctor_confirm_password,
-      doctor_city,
-      doctor_uf
+      id,
+      name,
+      email,
+      crm,
+      gender,
+      password,
+      confirm_password,
+      city,
+      uf
     } = req.body;
-    console.log(req.body);
+
     try {
-      existsOrError(doctor_email, "Login não informado");
-      existsOrError(doctor_password, "Senha não informada");
-      existsOrError(doctor_confirm_password, "Confirmação de senha invalida");
-      equalsOrError(
-        doctor_password,
-        doctor_confirm_password,
-        "Senhas não conferem"
-      );
+      existsOrError(email, "Login não informado");
+      existsOrError(password, "Senha não informada");
+      existsOrError(confirm_password, "Confirmação de senha invalida");
+      equalsOrError(password, confirm_password, "Senhas não conferem");
       const doctorFromDB = await app
         .db("doctor")
-        .where({ doctor_crm: doctor_crm })
+        .where({ doctor_crm: crm })
         .first();
-      if (!doctor_id) notExistsOrError(doctorFromDB, "Usuario já cadastrado");
+      if (!id) notExistsOrError(doctorFromDB, "Usuario já cadastrado");
     } catch (msg) {
       console.log(msg);
       return res.status(400).send(msg);
     }
 
-    doctor_password = encryptPassword(doctor_password);
-    delete doctor_confirm_password;
-
-    await knex("doctor")
+    password = encryptPassword(password);
+    delete confirm_password;
+    console.log(id, name, email, crm, password, confirm_password, city, uf);
+    await app
+      .db("doctor")
       .insert({
-        doctor_name,
-        doctor_email,
-        doctor_crm,
-        doctor_password,
-        doctor_city,
-        doctor_uf
+        doctor_name: name,
+        doctor_email: email,
+        doctor_crm: crm,
+        doctor_gender: gender,
+        doctor_password: password,
+        doctor_city: city,
+        doctor_uf: uf
       })
       .then(_ => res.status(201).send())
       .catch(err => res.status(500).send(err));
