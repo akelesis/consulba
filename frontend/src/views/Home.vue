@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img src="../assets/medico-img.jpg" alt="">
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -10,7 +10,6 @@
 export default {
   name: 'Home',
   components: {
-    
   }
 }
 </script>
