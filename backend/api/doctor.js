@@ -44,7 +44,6 @@ module.exports = app => {
 
     password = encryptPassword(password);
     delete confirm_password;
-    console.log(id, name, email, crm, gender, password, confirm_password, city, uf);
     await app
       .db("doctor")
       .insert({
