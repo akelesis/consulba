@@ -27,7 +27,7 @@ export default {
 
 body {
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   min-height: 100vh;
 }
 
@@ -70,4 +70,5 @@ body {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>

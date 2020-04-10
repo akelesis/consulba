@@ -3,7 +3,7 @@
     <div class="button-box">
       <Button
         text="Quero marcar a minha consulta"
-        @click.native="redirectLogin()"
+        @click.native="redirectConsul()"
         color="background-color: #78BBE6;"
       />
       <Button
@@ -26,6 +26,9 @@ export default {
   methods: {
     redirectReg() {
       this.$router.push("/register");
+    },
+    redirectConsul() {
+      this.$router.push("/dashpaciente")
     }
   }
 };

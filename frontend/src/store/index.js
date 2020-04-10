@@ -7,6 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
+    medico: {},
+    appointment: {}
   },
   mutations: {
     setUser(state, user) {

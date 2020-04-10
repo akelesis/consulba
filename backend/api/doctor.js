@@ -44,7 +44,6 @@ module.exports = app => {
 
     password = encryptPassword(password);
     delete confirm_password;
-    console.log(id, name, email, crm, password, confirm_password, city, uf);
     await app
       .db("doctor")
       .insert({
@@ -57,7 +56,10 @@ module.exports = app => {
         doctor_uf: uf
       })
       .then(_ => res.status(201).send())
-      .catch(err => res.status(500).send(err));
+      .catch(err => {
+        console.log(res) 
+        return res.status(500).send(err) 
+      });
   };
 
   return { get, post };

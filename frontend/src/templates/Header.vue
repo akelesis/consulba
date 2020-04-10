@@ -7,11 +7,11 @@
       <router-link to="/about">
         <div>O que é?</div>
       </router-link>
-      <router-link to="/login">
-        <div>Para médicos</div>
-      </router-link>
       <router-link to="/schedule">
         <div>Para pacientes</div>
+      </router-link>
+      <router-link to="/login">
+        <div>Login Médico</div>
       </router-link>
     </nav>
     <div class="dropdown" v-if="loggedIn()">
@@ -23,8 +23,11 @@
         <i class="fas fa-caret-down"></i>
       </div>
       <div :class="dropdownMenu" id="dropdown-menu">
-        <router-link to="/schedule">
+        <router-link to="/dashmed">
           <i class="far fa-calendar-alt"></i> Agenda
+        </router-link>
+        <router-link to="/agendamed">
+          <i class="far fa-clock"></i> Horários
         </router-link>
         <a @click="logOut()">
           <i class="fas fa-sign-out-alt"></i> Logout
@@ -68,6 +71,7 @@ export default {
       localStorage.removeItem("__consulba_user");
       let aux = null;
       this.$store.commit("setUser", aux);
+      this.$router.push('/')
     }
   },
   mounted() {
