@@ -1,34 +1,44 @@
 <template>
   <div class="postmed-container">
-      <p>NOME</p>
-      <p>Prox. Vaga:</p>
+      <p id="medico-post">{{ nome }}</p>
+      <p>Prox. Vaga: {{ vaga }}</p>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'PostMed'
+    name: 'PostMed',
+    props: {
+        nome: String,
+        vaga: String
+    }
 }
 </script>
 
 <style>
 .postmed-container {
-    background-color: rgb(125, 166, 199);
-    position: relative;
     display: flex;
+    background-color: rgb(125, 166, 199);
     flex-wrap: wrap;
     text-align: left;
     cursor: pointer;
-    height: auto;
+    min-height: 130px;
     width: 400px;
     box-shadow: 1px 1px 5px;
 }
 
 .postmed-container p{
     color: white;
-    font-size: 20px;
+    font-size: 25px;
     margin-left: 15px;
     width: 100vw;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#medico-post {
+    font-size: 30px;
+    margin-top: 10px;
 }
 
 </style>

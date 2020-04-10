@@ -59,13 +59,15 @@ export default {
   methods: {
     register() {
       this.doctor.city = this.city;
-      this.doctor.state = this.state.nome;
+      this.doctor.uf = this.state.nome;
       this.doctor.gender = this.gender;
 
-      axios.post("http://localhost:3000/doctor", this.doctor).then(() => {
-        alert("Cadastro realizado com sucesso!");
-        this.$router.push("/");
-      });
+      axios.post("http://localhost:3000/doctor", this.doctor)
+        .then(() => {
+          alert("Cadastro realizado com sucesso!");
+          this.$router.push("/");
+        })
+        .catch(err => { alert(err) })
     },
     getStates() {
       axios

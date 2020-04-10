@@ -4,6 +4,8 @@ module.exports = app => {
     .get(app.api.doctor.get)
     .post(app.api.doctor.post);
 
+  app.route("/auth").post(app.api.auth.signIn);
+
   app
     .route("/appointment")
     .get(app.api.appointment.get)

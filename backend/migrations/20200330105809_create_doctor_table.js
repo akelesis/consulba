@@ -4,6 +4,7 @@ exports.up = function(knex) {
     table.string("doctor_name").notNull();
     table.string("doctor_email").notNull();
     table.string("doctor_crm").notNull();
+    table.string("doctor_gender").notNull();
     table.string("doctor_password").notNull();
     table.string("doctor_city").notNull();
     table.string("doctor_uf").notNull();
