@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null
+    user: null,
   },
   mutations: {
     setUser(state, user) {
@@ -16,8 +16,8 @@ export default new Vuex.Store({
       } else {
         delete axios.defaults.headers.common["Authorization"];
       }
-    }
+    },
   },
   actions: {},
-  modules: {}
+  modules: {},
 });
