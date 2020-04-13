@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const { provider, email, password, sender, receiver } = require("../.env");
 
-module.exports = app => {
+module.exports = (app) => {
   const send = async (req, res) => {
     mail = req.body;
 
@@ -9,15 +9,15 @@ module.exports = app => {
       service: provider,
       auth: {
         user: email,
-        pass: password
-      }
+        pass: password,
+      },
     });
 
     const mailOption = {
       from: sender,
-      to: receiver,
+      to: mail.pacient_email,
       subject: `${mail.subject}`,
-      text: `${mail.text}`
+      text: `${mail.text}`,
     };
 
     await transporter.sendMail(mailOption, (err, info) => {
