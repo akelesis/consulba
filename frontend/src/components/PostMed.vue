@@ -1,7 +1,6 @@
 <template>
   <div class="postmed-container">
       <p id="medico-post">{{ nome }}</p>
-      <p>Prox. Vaga: {{ vaga }}</p>
   </div>
 </template>
 
@@ -21,8 +20,9 @@ export default {
     background-color: rgb(125, 166, 199);
     flex-wrap: wrap;
     text-align: left;
+    align-items: center;
     cursor: pointer;
-    min-height: 130px;
+    min-height: 100px;
     width: 400px;
     box-shadow: 1px 1px 5px;
 }
@@ -37,8 +37,7 @@ export default {
 }
 
 #medico-post {
-    font-size: 30px;
-    margin-top: 10px;
+    font-size: 35px;
 }
 
 </style>

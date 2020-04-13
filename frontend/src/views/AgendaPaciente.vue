@@ -4,21 +4,19 @@
     <div class="agendapaciente">
       <div class="date-paciente-container">
         <p>SELECIONE O DIA</p>
-        <input id="data" type="date" v-model="actualDate">
-        <Button 
-          text="MARCAR CONSULTA" 
-          color="background-color: rgb(71, 129, 175);"
-        />
+        <input id="data" type="date" v-model="actualDate" @change="showTimeOptions()"/>
+        <Button text="MARCAR CONSULTA" color="background-color: rgb(71, 129, 175);" />
       </div>
       <div class="hour-paciente-container">
         <p>SELECIONE UM HORÁRIO DISPONÍVEL</p>
         <div class="hours-paciente">
           <div class="hours-paciente-box">
-            <TextBoxRadio 
-              v-for="hora in horas" 
-              :key="hora.appoint_id" 
+            <TextBoxRadio
+              v-for="hora in horas"
+              :key="hora.appoint_id"
               :option="'hora_' + hora.appoint_id"
               :text="hora.time"
+              @click.native="getHora(hora)"
             />
           </div>
         </div>
@@ -28,53 +26,54 @@
 </template>
 
 <script>
-import Button from '../components/Button'
-import TextBoxRadio from '../components/TextBoxRadio'
-import axios from 'axios'
+import Button from "../components/Button";
+import TextBoxRadio from "../components/TextBoxRadio";
+import axios from "axios";
 
 export default {
-    name: "AgendaPaciente",
-    components: {
-      Button,
-      TextBoxRadio
+  name: "AgendaPaciente",
+  components: {
+    Button,
+    TextBoxRadio
+  },
+  data() {
+    return {
+      data: String,
+      actualDate: String,
+      horas: [],
+      horasAux: [],
+      medico: {}
+    };
+  },
+  methods: {
+    getHorarios() {
+      axios
+        .get(`http://localhost:3000/appointment/${this.$store.state.medico.doctor_id}`)
+        .then(res => {
+          this.horasAux = res.data
+        })
+        .catch(err => {
+          alert(err);
+        });
     },
-    data() {
-      return {
-        data: String,
-        actualDate: String,
-        horas: [
-          {appoint_id: 1, time: "7:00"}, 
-          {appoint_id: 2, time: "7:20"}, 
-          {appoint_id: 3, time: "7:40"}
-        ],
-        medico: {}
+    showTimeOptions(){
+      this.horas = []
+      for(let i = 0; i < this.horasAux.length; i++){
+        if(this.horasAux[i].date == this.actualDate && this.horasAux[i].patient_name == " "){
+          this.horas.push(this.horasAux[i])
+        }
       }
-    },
-    methods: {
-      setDate() {
-        const data = new Date()
-
-        this.actualDate = data.getFullYear() + 
-        '-' + ("0" + (data.getMonth() + 1)).slice(-2) + 
-        '-' + ("0" + data.getDate()).slice(-2)
-      },
-      getHorarios(){
-        axios.get('http://localhost:3000/appointment')
-          .then(res => {
-            alert(res.data)
-          })
-          
-      }
-    },  
-    mounted() {
-      this.setDate(),
-      this.getHorarios()
+      this.$forceUpdate()
     }
-}
+  },
+  mounted() {
+    this.getHorarios();
+  }
+};
 </script>
 
 <style>
-.agendapaciente-container{
+.agendapaciente-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -88,19 +87,19 @@ export default {
   height: auto;
 }
 
-.agendapaciente{
+.agendapaciente {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   width: 80vw;
 }
 
-.agendapaciente-container p{
+.agendapaciente-container p {
   font-size: 25px;
   color: rgb(58, 113, 158);
 }
 
-.date-paciente-container{
+.date-paciente-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -109,7 +108,7 @@ export default {
   height: 50vh;
 }
 
-.date-paciente-container #data{
+.date-paciente-container #data {
   font-size: 30px;
   width: 20vw;
   border: none;
@@ -125,7 +124,7 @@ export default {
   height: 60vh;
 }
 
-.hours-paciente div{
+.hours-paciente div {
   margin-top: 10px;
 }
 </style>
