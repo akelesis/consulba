@@ -23,6 +23,7 @@ export default {
   transition: filter 0.2s;
   transition: box-shadow 0.2s;
   outline: none;
+  background-color: #3982b0;
 }
 
 .main-button:hover {
