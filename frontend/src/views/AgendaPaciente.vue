@@ -30,7 +30,7 @@
 <script>
 import Button from '../components/Button'
 import TextBoxRadio from '../components/TextBoxRadio'
-//import axios from 'axios'
+import axios from 'axios'
 
 export default {
     name: "AgendaPaciente",
@@ -46,7 +46,8 @@ export default {
           {appoint_id: 1, time: "7:00"}, 
           {appoint_id: 2, time: "7:20"}, 
           {appoint_id: 3, time: "7:40"}
-        ]
+        ],
+        medico: {}
       }
     },
     methods: {
@@ -56,10 +57,18 @@ export default {
         this.actualDate = data.getFullYear() + 
         '-' + ("0" + (data.getMonth() + 1)).slice(-2) + 
         '-' + ("0" + data.getDate()).slice(-2)
+      },
+      getHorarios(){
+        axios.get('http://localhost:3000/appointment')
+          .then(res => {
+            alert(res.data)
+          })
+          
       }
     },  
     mounted() {
-      this.setDate()
+      this.setDate(),
+      this.getHorarios()
     }
 }
 </script>

@@ -12,7 +12,7 @@ module.exports = app => {
 
   const save = async (req, res) => {
     appointment = req.body;
-
+    console.log(appointment)
     app
       .db("appointment")
       .insert(appointment)
