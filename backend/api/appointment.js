@@ -1,11 +1,11 @@
 module.exports = (app) => {
   const { existsOrError } = app.api.validator;
-  const get = async (req, res) => {
-    const data = req.body;
+  const getByDoctor = async (req, res) => {
+    const doctor_id = req.params.id;
 
     try {
       existsOrError(
-        data.doctor_id,
+        doctor_id,
         "A identificação do médico não foi especificada"
       );
     } catch (msg) {
@@ -15,7 +15,7 @@ module.exports = (app) => {
     app
       .db("appointment")
       .select("*")
-      .where({ doctor_id: data.doctor_id })
+      .where({ doctor_id: doctor_id })
       .then((appointments) => res.json(appointments))
       .catch((err) => res.status(500).send(err));
   };
@@ -30,5 +30,5 @@ module.exports = (app) => {
       .catch((err) => res.status(500).send(err));
   };
 
-  return { get, save };
+  return { getByDoctor, save };
 };
