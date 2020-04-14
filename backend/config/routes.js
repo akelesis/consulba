@@ -3,7 +3,10 @@ module.exports = (app) => {
 
   app.route("/auth").post(app.api.auth.signIn);
 
-  app.route("/appointment").post(app.api.appointment.save);
+  app
+    .route("/appointment")
+    .post(app.api.appointment.save)
+    .put(app.api.appointment.save);
 
   app.route("/appointment/:id").get(app.api.appointment.getByDoctor);
 
