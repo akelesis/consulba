@@ -6,7 +6,6 @@
             v-for="medico in medicos" 
             :key="medico.doctor_id" 
             :nome="medico.doctor_name"
-            :vaga="medico.vaga"
             @click.native="agendaConsulta(medico)"
         />
       </div>
