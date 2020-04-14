@@ -23,11 +23,20 @@ module.exports = (app) => {
   const save = async (req, res) => {
     appointment = req.body;
 
-    app
-      .db("appointment")
-      .insert(appointment)
-      .then((_) => res.status(204).send())
-      .catch((err) => res.status(500).send(err));
+    if (appointment.appoint_id) {
+      app
+        .db("appointment")
+        .update(appointment)
+        .where({ appoint_id: appointment.appoint_id })
+        .then((_) => res.status(204).send())
+        .catch((err) => res.status(500).send());
+    } else {
+      app
+        .db("appointment")
+        .insert(appointment)
+        .then((_) => res.status(204).send())
+        .catch((err) => res.status(500).send(err));
+    }
   };
 
   return { getByDoctor, save };

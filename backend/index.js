@@ -1,7 +1,6 @@
 const app = require("express")();
 const consign = require("consign");
 const db = require("./config/db");
-const io = (app.io = require("socket.io")());
 
 app.db = db;
 
