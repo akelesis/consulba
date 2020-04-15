@@ -4,7 +4,7 @@
       <p>{{ text }}</p>
       <hr />
     </div>
-    <div class="input-group">
+    <div class="input-group-modal">
       <input type="text" id="patient-name" placeholder="Nome Completo" v-model="name" />
       <input type="email" id="patient-email" placeholder="Email" v-model="email" />
     </div>
@@ -40,13 +40,17 @@ export default {
       appoint.patient_email = this.email;
 
       axios
-        .put(`http://localhost:3000/appointment`, appoint)
-        .then(res => {
-          alert(res.data)
+        .put("http://localhost:3000/appointment", appoint)
+        .then(() => {
+          alert("Horário Marcado com sucesso!")
+          this.$store.state.appointment = {}
+          this.$router.push('/')
         })
         .catch(err => {
-          err
+          alert(err)
         });
+      
+      
     }
   }
 };
@@ -78,7 +82,7 @@ export default {
   background-image: linear-gradient(to right, #ccc, #aaa, #ccc);
 }
 
-.input-group {
+.input-group-modal {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
