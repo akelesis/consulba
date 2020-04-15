@@ -177,6 +177,10 @@ export default {
   width: 80vw;
 }
 
+.agendamed input{
+  color: #777;
+}
+
 .agendamed-container p {
   font-size: 25px;
   color: rgb(58, 113, 158);

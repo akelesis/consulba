@@ -1,27 +1,34 @@
 <template>
   <div class="room-container">
-    <h1 class="title-room">ATENDIMENTO EM ANDAMENTO - [NOME DO PACIENTE]</h1>
-    <div class="conference-container" id="conference-container"></div>
-    <Button text="FINALIZAR ATENDIMENTO" />
+    <h1
+      class="title-room"
+    >ATENDIMENTO EM ANDAMENTO - {{ this.$store.state.appointment.patient_name.toUpperCase() }}</h1>
+    <div class="call-container">
+      <div class="conference-container" id="conference-container"></div>
+    </div>
+    <Button class="room-button" text="FINALIZAR ATENDIMENTO" @click.native="finalizaAtendimento()"/>
   </div>
 </template>
 
 <script>
 import Button from "../components/Button";
+import axios from "axios";
+
 export default {
   components: {
     Button
   },
   data() {
     return {
-      roomName: null
+      roomName: `${this.$store.state.appointment.patient_name.split(" ")[0]}`
     };
   },
   methods: {
     initializeMedia() {
+      let moment = Date.now();
       const domain = "meet.jit.si/";
       const options = {
-        roomName: "teste",
+        roomName: this.roomName + moment,
         width: 700,
         height: 500,
         parentNode: document.querySelector("#conference-container"),
@@ -29,7 +36,34 @@ export default {
       };
       const api = new window.JitsiMeetExternalAPI(domain, options);
 
+      let mail = {
+        patient_email: this.$store.state.appointment.patient_email,
+        subject: "[CONSULBA] LINK DE CONSULTA DISPONÍVEL",
+        text: `Olá ${
+          this.$store.state.appointment.patient_name
+        }\nO link da sua consulta já está disponível e deve ser acessado imediatamente, basta clicar no link a seguir\n\nhttps://meet.jit.si//${this
+          .roomName + moment}`
+      };
+
+      axios
+        .post("http://localhost:3000/mail", mail)
+        .then(() => {})
+        .catch(err => {
+          alert(err);
+        });
+
       console.log(api);
+    },
+    finalizaAtendimento(){
+      this.$store.state.appointment.done = true
+      axios.put("http://localhost:3000/appointment", this.$store.state.appointment)
+        .then(() => {
+          alert("Atendimento finalizado!")
+          this.$router.push('/dashmed')
+        })
+        .catch(err => {
+          alert(err)
+        })
     }
   },
   mounted() {
@@ -52,16 +86,18 @@ export default {
   width: 99vw;
 }
 
-.conference-container {
-  width: 100vw;
-  height: 50vh;
+.call-container{
+  position: relative;
+  height: auto;
 }
 
-.button-box {
+.conference-container {
+  width: 100vw;
   height: auto;
-  margin-top: 20px;
-  width: 50vw;
-  display: flex;
-  justify-content: center;
+}
+
+.room-button {
+  position: relative;
+  top: 20px;
 }
 </style>
