@@ -5,9 +5,9 @@ module.exports = {
   connection: {
     database: "consulba",
     user: "root",
-    password: ""
+    password: "/S2#QbEJRPvG8",
   },
   migrations: {
-    tableName: "knex_migrations"
-  }
+    tableName: "knex_migrations",
+  },
 };

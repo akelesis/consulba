@@ -62,19 +62,21 @@ export default {
       this.doctor.uf = this.state.nome;
       this.doctor.gender = this.gender;
 
-      axios.post("http://localhost:3000/doctor", this.doctor)
+      axios
+        .post("http://localhost:3000/doctor", this.doctor)
         .then(() => {
           alert("Cadastro realizado com sucesso!");
           this.$router.push("/");
         })
-        .catch(err => { alert(err) })
+        .catch(err => {
+          alert(err);
+        });
     },
     getStates() {
       axios
         .get("https://servicodados.ibge.gov.br/api/v1/localidades/estados/")
         .then(res => {
           this.states = res.data;
-          console.log(this.states);
         });
     },
     getCities() {
@@ -83,7 +85,6 @@ export default {
           `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${this.state.id}/municipios`
         )
         .then(res => {
-          console.log(JSON.stringify(res.data));
           this.cities = res.data;
         });
     }
@@ -131,7 +132,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: auto;
 }
 
 .input-group {

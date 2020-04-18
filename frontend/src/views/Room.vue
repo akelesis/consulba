@@ -6,7 +6,7 @@
     <div class="call-container">
       <div class="conference-container" id="conference-container"></div>
     </div>
-    <Button class="room-button" text="FINALIZAR ATENDIMENTO" @click.native="finalizaAtendimento()"/>
+    <Button class="room-button" text="FINALIZAR ATENDIMENTO" @click.native="finalizaAtendimento()" />
   </div>
 </template>
 
@@ -52,18 +52,19 @@ export default {
           alert(err);
         });
 
-      console.log(api);
+      return api;
     },
-    finalizaAtendimento(){
-      this.$store.state.appointment.done = true
-      axios.put("http://localhost:3000/appointment", this.$store.state.appointment)
+    finalizaAtendimento() {
+      this.$store.state.appointment.done = true;
+      axios
+        .put("http://localhost:3000/appointment", this.$store.state.appointment)
         .then(() => {
-          alert("Atendimento finalizado!")
-          this.$router.push('/dashmed')
+          alert("Atendimento finalizado!");
+          this.$router.push("/dashmed");
         })
         .catch(err => {
-          alert(err)
-        })
+          alert(err);
+        });
     }
   },
   mounted() {
@@ -86,7 +87,7 @@ export default {
   width: 99vw;
 }
 
-.call-container{
+.call-container {
   position: relative;
   height: auto;
 }
