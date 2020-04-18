@@ -146,6 +146,7 @@ export default {
 }
 .input-group input,
 select {
+  margin-top: 20px;
   width: 45%;
   height: 44px;
   border-radius: 5px;
