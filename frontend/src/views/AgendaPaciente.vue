@@ -46,6 +46,7 @@ import Button from "../components/Button";
 import TextBoxRadio from "../components/TextBoxRadio";
 import axios from "axios";
 import Modal from "../components/Modal";
+import { baseApiUrl } from "../global";
 
 export default {
   name: "AgendaPaciente",
@@ -69,9 +70,7 @@ export default {
   methods: {
     getHorarios() {
       axios
-        .get(
-          `http://localhost:3000/appointment/${this.$store.state.medico.doctor_id}`
-        )
+        .get(`${baseApiUrl}/appointment/${this.$store.state.medico.doctor_id}`)
         .then(res => {
           this.horasAux = res.data;
         })
@@ -94,7 +93,7 @@ export default {
     getHora(hora) {
       if (!this.flagFunction) {
         this.horaPaciente = hora.time;
-        this.idHora = hora.appoint_id
+        this.idHora = hora.appoint_id;
         this.flagFunction = true;
       } else {
         this.flagFunction = false;
@@ -108,7 +107,7 @@ export default {
           date: this.actualDate,
           time: this.horaPaciente
         };
-        this.$store.state.appointment = appoint
+        this.$store.state.appointment = appoint;
         this.flagModal = true;
       }
     },

@@ -22,6 +22,7 @@
 
 <script>
 import axios from "axios";
+import { baseApiUrl } from "../global";
 export default {
   data() {
     return {
@@ -32,7 +33,7 @@ export default {
   methods: {
     login() {
       axios
-        .post("http://localhost:3000/auth", {
+        .post(baseApiUrl + "/auth", {
           email: this.email,
           password: this.password
         })

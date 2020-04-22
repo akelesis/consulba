@@ -7,7 +7,7 @@
       <router-link to="/about">
         <div>O que é?</div>
       </router-link>
-      <router-link to="/schedule">
+      <router-link to="/dashpaciente">
         <div>Para pacientes</div>
       </router-link>
       <router-link to="/login">
@@ -71,7 +71,7 @@ export default {
       localStorage.removeItem("__consulba_user");
       let aux = null;
       this.$store.commit("setUser", aux);
-      this.$router.push('/')
+      this.$router.push("/");
     }
   },
   mounted() {

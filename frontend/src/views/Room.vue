@@ -13,6 +13,7 @@
 <script>
 import Button from "../components/Button";
 import axios from "axios";
+import { baseApiUrl } from "../global";
 
 export default {
   components: {
@@ -45,19 +46,19 @@ export default {
           .roomName + moment}`
       };
 
+      console.log(api);
+
       axios
-        .post("http://localhost:3000/mail", mail)
+        .post(baseApiUrl + "/mail", mail)
         .then(() => {})
         .catch(err => {
           alert(err);
         });
-
-      return api;
     },
     finalizaAtendimento() {
       this.$store.state.appointment.done = true;
       axios
-        .put("http://localhost:3000/appointment", this.$store.state.appointment)
+        .put(baseApiUrl + "/appointment", this.$store.state.appointment)
         .then(() => {
           alert("Atendimento finalizado!");
           this.$router.push("/dashmed");

@@ -34,6 +34,7 @@
 import Button from "../components/Button";
 import TextBoxCheck from "../components/TextBoxCheck";
 import axios from "axios";
+import { baseApiUrl } from "../global";
 
 export default {
   name: "AgendaMed",
@@ -114,22 +115,22 @@ export default {
 
       this.horasDisponiveis = horasFinais;
 
-      this.appoint.doctor_id = this.$store.state.user.id 
-      this.appoint.date = this.actualDate
-      this.appoint.patient_name = " "
-      this.appoint.patient_email = " "
+      this.appoint.doctor_id = this.$store.state.user.id;
+      this.appoint.date = this.actualDate;
+      this.appoint.patient_name = " ";
+      this.appoint.patient_email = " ";
 
-      let teste
+      let teste;
 
-      for(let i = 0; i < this.horasDisponiveis.length; i++){
-        this.appoint.time = this.horasDisponiveis[i]
-        
-        teste = await axios.post('http://localhost:3000/appointment', this.appoint)
+      for (let i = 0; i < this.horasDisponiveis.length; i++) {
+        this.appoint.time = this.horasDisponiveis[i];
+
+        teste = await axios.post(baseApiUrl + "/appointment", this.appoint);
       }
 
-      alert("AGENDA DO DIA CADASTRADA COM SUCESSO!")
+      alert("AGENDA DO DIA CADASTRADA COM SUCESSO!");
 
-      return teste
+      return teste;
     },
     addToHorasDisponiveis(hora) {
       if (!this.flagFunction) {
@@ -177,7 +178,7 @@ export default {
   width: 80vw;
 }
 
-.agendamed input{
+.agendamed input {
   color: #777;
 }
 

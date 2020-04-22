@@ -16,6 +16,7 @@
 <script>
 import Button from "./Button";
 import axios from "axios";
+import { baseApiUrl } from "../global";
 
 export default {
   name: "Modal",
@@ -40,17 +41,15 @@ export default {
       appoint.patient_email = this.email;
 
       axios
-        .put("http://localhost:3000/appointment", appoint)
+        .put(baseApiUrl + "/appointment", appoint)
         .then(() => {
-          alert("Horário Marcado com sucesso!")
-          this.$store.state.appointment = {}
-          this.$router.push('/')
+          alert("Horário Marcado com sucesso!");
+          this.$store.state.appointment = {};
+          this.$router.push("/");
         })
         .catch(err => {
-          alert(err)
+          alert(err);
         });
-      
-      
     }
   }
 };

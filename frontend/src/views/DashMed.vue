@@ -28,6 +28,7 @@
 import Button from "../components/Button";
 import TextBoxRadio from "../components/TextBoxRadio";
 import axios from "axios";
+import { baseApiUrl } from "../global";
 
 export default {
   name: "DashMed",
@@ -48,12 +49,11 @@ export default {
     },
     saveAppointment() {
       this.$store.state.appointment = this.appointment;
-      alert(JSON.stringify(this.$store.state.appointment))
-      this.$router.push(`/room/${this.$store.state.user.id}`)
+      this.$router.push(`/room/${this.$store.state.user.id}`);
     },
     getAppointments() {
       axios
-        .get(`http://localhost:3000/appointment/${this.$store.state.user.id}`)
+        .get(`${baseApiUrl}/appointment/${this.$store.state.user.id}`)
         .then(res => {
           this.pacientesAux = res.data;
           this.setPacientes();

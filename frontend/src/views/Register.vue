@@ -45,6 +45,7 @@
 
 <script>
 import axios from "axios";
+import { baseApiUrl } from "../global";
 export default {
   data() {
     return {
@@ -63,7 +64,7 @@ export default {
       this.doctor.gender = this.gender;
 
       axios
-        .post("http://localhost:3000/doctor", this.doctor)
+        .post(baseApiUrl + "/doctor", this.doctor)
         .then(() => {
           alert("Cadastro realizado com sucesso!");
           this.$router.push("/");
