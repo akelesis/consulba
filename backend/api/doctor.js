@@ -44,43 +44,41 @@ module.exports = (app) => {
 
     password = encryptPassword(password);
     delete confirm_password;
-    if (id) {
-      await app
+    await app
+      .db("doctor")
+      .insert({
+        doctor_name: name,
+        doctor_email: email,
+        doctor_crm: crm,
+        doctor_gender: gender,
+        doctor_password: password,
+        doctor_city: city,
+        doctor_uf: uf,
+      })
+      .then((_) => res.status(201).send())
+      .catch((err) => {
+        console.log(res);
+        return res.status(500).send(err);
+      });
+  };
+
+  const update = async (req, res) => {
+    const doctor = req.body;
+
+    if (doctor.doctor_id) {
+      app
         .db("doctor")
-        .update({
-          doctor_name: name,
-          doctor_email: email,
-          doctor_crm: crm,
-          doctor_gender: gender,
-          doctor_password: password,
-          doctor_city: city,
-          doctor_uf: uf,
-        })
-        .where({ doctor_id: id })
-        .then((_) => res.status(204).send())
+        .update({ doctor_active: doctor.doctor_active })
+        .where({ doctor_id: doctor.doctor_id })
+        .then((res) => res.status(204).send())
         .catch((err) => {
-          console.log(res);
-          return res.status(500).send(err);
+          console.log("algo de errado não está certo!");
+          res.status(500).send(err);
         });
     } else {
-      await app
-        .db("doctor")
-        .insert({
-          doctor_name: name,
-          doctor_email: email,
-          doctor_crm: crm,
-          doctor_gender: gender,
-          doctor_password: password,
-          doctor_city: city,
-          doctor_uf: uf,
-        })
-        .then((_) => res.status(201).send())
-        .catch((err) => {
-          console.log(res);
-          return res.status(500).send(err);
-        });
+      return res.status(400);
     }
   };
 
-  return { get, post };
+  return { get, post, update };
 };
