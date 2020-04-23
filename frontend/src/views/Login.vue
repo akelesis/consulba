@@ -4,10 +4,10 @@
       <div class="login-form">
         <h1>LOGIN</h1>
         <form>
-          <div class="input-group">
+          <div class="input-group-login">
             <input type="email" placeholder="Email" v-model="email" />
           </div>
-          <div class="input-group">
+          <div class="input-group-login">
             <input type="password" placeholder="Password" v-model="password" />
           </div>
           <small class="login-msg">
@@ -51,6 +51,7 @@ export default {
 
 <style>
 .login-container {
+  position: absolute;
   background-image: url("../assets/medico-img.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -89,14 +90,14 @@ export default {
   height: 100%;
 }
 
-.input-group + .input-group {
+.input-group-login + .input-group-login {
   margin-top: 50px;
 }
 
-.input-group input:only-child {
+.input-group-login input:only-child {
   width: 100%;
 }
-.input-group input,
+.input-group-login input,
 select {
   width: 45%;
   height: 44px;
