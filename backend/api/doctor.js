@@ -1,10 +1,10 @@
 const knex = require("../config/db");
 const bcrypt = require("bcryptjs");
 
-module.exports = app => {
+module.exports = (app) => {
   const { existsOrError, notExistsOrError, equalsOrError } = app.api.validator;
 
-  const encryptPassword = password => {
+  const encryptPassword = (password) => {
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
   };
@@ -24,7 +24,7 @@ module.exports = app => {
       password,
       confirm_password,
       city,
-      uf
+      uf,
     } = req.body;
 
     try {
@@ -44,22 +44,42 @@ module.exports = app => {
 
     password = encryptPassword(password);
     delete confirm_password;
-    await app
-      .db("doctor")
-      .insert({
-        doctor_name: name,
-        doctor_email: email,
-        doctor_crm: crm,
-        doctor_gender: gender,
-        doctor_password: password,
-        doctor_city: city,
-        doctor_uf: uf
-      })
-      .then(_ => res.status(201).send())
-      .catch(err => {
-        console.log(res) 
-        return res.status(500).send(err) 
-      });
+    if (id) {
+      await app
+        .db("doctor")
+        .update({
+          doctor_name: name,
+          doctor_email: email,
+          doctor_crm: crm,
+          doctor_gender: gender,
+          doctor_password: password,
+          doctor_city: city,
+          doctor_uf: uf,
+        })
+        .where({ doctor_id: id })
+        .then((_) => res.status(204).send())
+        .catch((err) => {
+          console.log(res);
+          return res.status(500).send(err);
+        });
+    } else {
+      await app
+        .db("doctor")
+        .insert({
+          doctor_name: name,
+          doctor_email: email,
+          doctor_crm: crm,
+          doctor_gender: gender,
+          doctor_password: password,
+          doctor_city: city,
+          doctor_uf: uf,
+        })
+        .then((_) => res.status(201).send())
+        .catch((err) => {
+          console.log(res);
+          return res.status(500).send(err);
+        });
+    }
   };
 
   return { get, post };
