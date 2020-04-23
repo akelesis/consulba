@@ -36,8 +36,13 @@ export default {
       axios
         .get(baseApiUrl + "/doctor")
         .then(res => {
-          this.medicos = res.data;
           for (let i = 0; i < res.data.length; i++) {
+            if (res.data[i].doctor_active) {
+              this.medicos.push(res.data[i]);
+            }
+          }
+          //this.medicos = res.data;
+          for (let i = 0; i < this.medicos.length; i++) {
             if (this.medicos[i].doctor_gender == "Masc") {
               this.medicos[i].doctor_name =
                 "Dr. " + this.medicos[i].doctor_name;
