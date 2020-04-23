@@ -91,6 +91,7 @@ export default {
 }
 
 .header-container {
+  z-index: 5;
   display: flex;
   position: fixed;
   align-items: center;

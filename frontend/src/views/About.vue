@@ -20,11 +20,13 @@ export default {};
 
 <style>
 .about-container {
+  position: absolute;
   background-image: url("../assets/medico-img.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
-  height: 95vh;
+  height: 90vh;
+  z-index: -1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
