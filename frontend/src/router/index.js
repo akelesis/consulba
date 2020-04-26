@@ -5,6 +5,7 @@ import DashMed from '../views/DashMed'
 import DashPaciente from '../views/DashPaciente'
 import AgendaMed from '../views/AgendaMed'
 import AgendaPaciente from '../views/AgendaPaciente'
+import Adm from '../views/Adm'
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/agendapaciente',
     name: 'AgendaPaciente',
     component: AgendaPaciente
+  },
+  {
+    path: '/adm',
+    name: 'Adm',
+    component: Adm
   },
   {
     path: "/register",

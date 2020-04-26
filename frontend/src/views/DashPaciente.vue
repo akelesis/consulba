@@ -40,8 +40,9 @@ export default {
             if (res.data[i].doctor_active) {
               this.medicos.push(res.data[i]);
             }
+            console.log(JSON.stringify(res.data[i]))
           }
-          //this.medicos = res.data;
+          
           for (let i = 0; i < this.medicos.length; i++) {
             if (this.medicos[i].doctor_gender == "Masc") {
               this.medicos[i].doctor_name =
